@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q73GGZE6P1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q73GGZE6P1');
+</script>
+  <title>Admin</title>
+</head>
+  
+
+
+
+
+
+
+<body>
+  <!--Navbar-->
+  <!-- <div class="nav">
+   <div class="two">
+     <a href="/"><img src="../static/images/edzetta original logo.png" alt="" /> 
+     </a> 
+   </div>
+
+   <div id="overlay">
+     <div class="navcard"></div>
+   </div>
+
+   <div class="hb">
+     <a id="btnhb" href="#" class="hamburger hide-for-dekstop">
+       <span></span>
+       <span></span>
+       <span></span>
+     </a>
+   </div>
+
+   <div class="one">
+     <a href="/" style="text-decoration: none">
+       <p>Home</p>
+     </a>
+     <a href="courses" style="text-decoration: none">
+       <p>Courses</p>
+     </a>
+     <a href="blogs" style="text-decoration: none">
+       <p>Blog</p>
+     </a>
+     <p>About</p>
+   </div>
+
+
+ </div>
+
+ <div id="hm" class="header__menu hide-for-dekstop hide-for-mobile">
+   <a href="/" style="text-decoration: none">
+     <p>Home</p>
+   </a>
+   <a href="courses" style="text-decoration: none">
+     <p>Courses</p>
+   </a>
+   <a href="blogs" style="text-decoration: none">
+     <p>Blog</p>
+   </a>
+   <a href="./about.html" style="text-decoration: none">
+     <p>About</p>
+   </a>
+   <a href="./about.html" style="text-decoration: none"></a>
+
+
+ </div> -->
+
+ <!--End of Navbar-->
+
+
+
+   <!--IF Msg==1-->
+    <center>
+      <h1>Course Table</h1>
+        <table  table class="table table-striped" style="width:60%">
+                     <tr>
+                       <th>Course Id</th>
+                       <th>Course Name</th>
+                       <th><a href="/delete_course_all" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete All the records ?')">Delete All</a></th>
+                       <th><button type="button"  class="btn btn-success float-right"
+                        data-toggle="modal" data-target="#mymodal1">Add New Course</button></th>
+                    </tr>
+                     
+                     {% for row in res1 %}
+                     <tr>
+                       <td>{{row[0]}}</td>
+                       <td>{{row[1]}}</td>
+                       <td>
+                          <td><a href="/update_slot/{{row[0]}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit1{{row[0]}}">Edit</a></td>
+                          <td><a href="/delete_course/{{row[0]}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a></td>
+                      </td>
+                      </tr>
+                                       
+                                     <!-- Modal Edit Course-->
+<div id="modaledit1{{row[0]}}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+     <div class="modal-content">
+        <div class="modal-header">
+           <h4 class="modal-title">Update Information</h4>
+        </div>
+
+        <div class="modal-body">
+           <form action="{{url_for('update_course')}}" method="POST">
+              
+            <div class="form-group">
+                 <label>Course Name:</label>
+                  <input type="hidden"  name="courseId" value="{{row[0]}}">
+                 <input type="text" class="form-control" name="courseName" value="{{row[1]}}">
+              </div>
+
+              <div class="form-group">
+                 <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+
+            </form>
+
+        </div>
+
+        <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+     
+        </div>
+  </div>
+</div>
+                   {% endfor %}
+                   
+      </table>
+     
+            
+        <!-- Modal Add Course-->
+
+             <div id="mymodal1" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+            
+                       <h4 class="modal-title">Add New Course</h4>
+                    </div>
+                    <div class="modal-body">
+        
+                       <form action="{{url_for('insert_course')}}" method="POST">
+                
+                          <div class="form-group">
+                             <label>Course Name:</label>
+                             <input type="text" class="form-control" name="courseName" required="1">
+                          </div>
+            
+                          <div class="form-group">
+                             <button class="btn btn-primary" type="submit">Add Course</button>
+                          </div>
+            
+                       </form>
+                    </div>
+           
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>         
+     
+                  </div>
+              </div>
+           </div>  
+    </center>	
+
+    <center>
+      <h1>Time Slot Table</h1>
+      <div class="time_slot_parent" style="height: 592.800px;  width: 1112.800px; overflow-y: scroll;">
+         <table  table class="table table-striped" style="width:82%">
+            <tr>
+              <th>Slot Id</th>
+              <th>Slot Date</th>
+              <th>Slot Time</th>
+              <th>Total Vacancies</th>
+              <th>Available Vacancies</th>
+              <th><a href="/delete_slot_all" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete All the records ?')">Delete All</a></th>
+              <th><button type="button"  class="btn btn-success float-right"
+               data-toggle="modal" data-target="#mymodal">Add New Slot</button></th>
+             </tr>
+            
+            {% for row in res5 %}
+            <tr>
+              <td>{{row[0]}}</td>
+              <td>{{row[1]}}</td>
+              <td>{{row[2]}}</td>
+              <td>{{row[3]}}</td>
+              <td>{{row[4]}}</td>
+              
+              <td>
+               <td><a href="/update_slot/{{row[0]}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row[0]}}">Edit</a></td>
+               <td><a href="/delete_slot/{{row[0]}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a></td>
+           </td>
+            </tr>
+           
+                              <!-- Modal Edit Slot-->
+<div id="modaledit{{row[0]}}" class="modal fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+ <div class="modal-header">
+    <h4 class="modal-title">Update Information</h4>
+ </div>
+
+ <div class="modal-body">
+    <form action="{{url_for('update_slot')}}" method="POST">
+       
+     <div class="form-group">
+        <label>Format: 21,Dec </label>
+          <label>Slot Date:</label>
+           <input type="hidden"  name="slotId" value="{{row[0]}}">
+          <input type="text" class="form-control" name="slotDate" value="{{row[1]}}">
+       </div>
+
+       <div class="form-group">
+          <label>Slot Time:</label>
+          <input type="text" class="form-control" name="slotTime" value="{{row[2]}}">
+       </div>
+
+       <div class="form-group">
+        <label>Total Vacancies:</label>
+        <input type="number" class="form-control" name="totalSlots" value="{{row[3]}}">
+     </div>
+
+       <div class="form-group">
+          <button class="btn btn-primary" type="submit">Update</button>
+       </div>
+
+     </form>
+
+ </div>
+
+ <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+   </div>
+
+ </div>
+</div>
+</div>
+            {% endfor %}
+            
+</table>
+      </div>
+    
+     
+            
+        <!-- Modal Add Time Slot-->
+
+             <div id="mymodal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                 <div class="modal-content">
+                    <div class="modal-header">
+            
+                       <h4 class="modal-title">Add Time Slot</h4>
+                    </div>
+                    <div class="modal-body">
+        
+                       <form action="{{url_for('insert_slot')}}" method="POST">
+                
+                          <div class="form-group">
+                            <p style="font-weight: bold;">Only write numerical date and comma separeted month(only 1st 3 letters) and don't put any space!</p>
+                           <label>Example: <strong> 21,Dec</strong> </label>
+                           <br>
+                             <label>Slot Date:</label>
+                             <input type="text" class="form-control" name="slotDate" required="1">
+                          </div>
+            
+                           <div class="form-group">
+                            <label>Example:   <strong>  10:30am </strong>  </label>
+                            <br>
+                             <label>Slot Time:</label>
+                             <input type="text" class="form-control" name="slotTime" required="1">           
+                          </div>
+
+                          <div class="form-group">
+                           <label>Total Vacancies:</label>
+                           <input type="number" class="form-control" name="totalSlots" required="1">           
+                        </div>
+                        
+                          <div class="form-group">
+                             <button class="btn btn-primary" type="submit">Add Time Slot</button>
+                          </div>
+                       </form>
+                    </div>
+           
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>         
+     
+                  </div>
+              </div>
+           </div>  
+
+    </center>	
+
+
+
+    <center>
+      <h1>Registration Table</h1>
+      <div class="registration_parent"  style="height: 592.800px; width: 1308.8px; overflow-y: scroll;" >
+         <table  table class="table table-striped" style="width:60%">
+            <tr>
+              <th>Child Id</th>
+              <th>Child Name</th>
+              <th>Parent Name</th>
+              <th>Phone No.</th>
+              <th>Email Id</th>
+              <th>Age</th>
+              <th>Course Name</th>
+              <th>Course Id</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Laptop</th>
+              <th> <a href="/delete_student_all" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete All the records ?')">Delete All</a></th>
+            </tr>
+          
+
+
+            {% for row in res2 %}
+            <tr>
+              <td>{{row[0]}}</td>
+              <td>{{row[1]}}</td>
+              <td>{{row[2]}}</td>
+              <td>{{row[3]}}</td>
+              <td>{{row[4]}}</td>
+              <td>{{row[5]}}</td>
+              <td>{{row[6]}}</td>
+              <td>{{row[7]}}</td>
+              <td>{{row[8]}}</td>
+              <td>{{row[9]}}</td>
+              <td>{{row[10]}}</td>
+              <td><a href="/delete_student/{{row[0]}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a></td>
+            </tr>
+            {% endfor %}
+           
+</table>
+      </div>
+       
+    </center>	
+
+    <center>
+      <h1>Callback Table</h1>
+      <div class="callback_parent"  style="height: 592.800px; width: 1112.800px; overflow-y: scroll;">
+         <table table class="table table-striped" style="width:60%">
+            <tr>
+              <th>Callback Id</th>
+              <th>Name</th>
+              <th>Phone No.</th>
+              <th>Time</th>
+              <th> <a href="/delete_callback_all" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete All the records ?')">Delete All</a></th>
+            </tr>
+            
+            {% for row in res3 %}
+            <tr>
+              <td>{{row[0]}}</td>
+              <td>{{row[1]}}</td>
+              <td>{{row[2]}}</td>
+              <td>{{row[3]}}</td>
+              <td><a href="/delete_callback/{{row[0]}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">Delete</a></td>
+           </tr>
+            {% endfor %}
+           
+</table>
+      </div>
+    
+    </center>	
+
+    
+    <center>
+      <h1>All Records Table</h1>
+      <div class="registration_parent"  style="height: 592.800px; width: 1308.8px; overflow-y: scroll;" >
+         <table  table class="table table-striped" style="width:60%">
+            <tr>
+              <th>Child Id</th>
+              <th>Child Name</th>
+              <th>Parent Name</th>
+              <th>Phone No.</th>
+              <th>Email Id</th>
+              <th>Age</th>
+              <th>Course Name</th>
+              <th>Course Id</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Laptop</th>
+              <th> <a href="/delete_all_records_all" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete All the records ?')">Delete All</a></th>
+              <td><a href="/download" class="btn btn-success btn-xs" onclick="return confirm('Are You Sure you want to download?')">Download</a></td>
+            </tr>
+          
+
+
+            {% for row in res6 %}
+            <tr>
+              <td>{{row[0]}}</td>
+              <td>{{row[1]}}</td>
+              <td>{{row[2]}}</td>
+              <td>{{row[3]}}</td>
+              <td>{{row[4]}}</td>
+              <td>{{row[5]}}</td>
+              <td>{{row[6]}}</td>
+              <td>{{row[7]}}</td>
+              <td>{{row[8]}}</td>
+              <td>{{row[9]}}</td>
+              <td>{{row[10]}}</td>
+            </tr>
+            {% endfor %}
+           
+</table>
+      </div>
+       
+    </center>	
+    
+    <center>
+      {% if res4 == '0' %}
+      <h1>Get Course Wise Students</h1>
+      <form action="#",  method ="POST">
+        <label for="name">Course Name:</label><br>
+        <input type="text" id="name" name="courseName" value="" required><br>
+        <input type="submit" value="Submit">
+       </form>
+    
+
+      {% elif res4 != '0' %}
+    </center>
+  
+    
+    <center>
+      <h1>Course Wise Students</h1>
+        <table table class="table table-striped" style="width:60%">
+                     <tr>
+                       <th>Child Id</th>
+                       <th>Child Name</th>
+                       <th>Parent Name</th>
+                       <th>Phone No.</th>
+                       <th>Email Id</th>
+                       <th>Age</th>
+                       <th>Course Name</th>
+                       <th>Course Id</th>
+                       <th>Date</th>
+                       <th>Time</th>
+                       <th>Laptop</th>
+                     </tr>
+                     
+                     {% for row in res4 %}
+                     <tr>
+                       <td>{{row[0]}}</td>
+                       <td>{{row[1]}}</td>
+                       <td>{{row[2]}}</td>
+                       <td>{{row[3]}}</td>
+                       <td>{{row[4]}}</td>
+                       <td>{{row[5]}}</td>
+                       <td>{{row[6]}}</td>
+                       <td>{{row[7]}}</td>
+                       <td>{{row[8]}}</td>
+                       <td>{{row[9]}}</td>
+                       <td>{{row[10]}}</td>
+                     </tr>
+                     {% endfor %}
+        </table>
+    </center>	
+
+   <!--else: Login code-->
+
+    {% endif %}
+</body>
+</html>

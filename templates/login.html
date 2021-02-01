@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/login.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../static/styles/home.css" />
+<link rel="shortcut icon" href="../static/images/favicon.ico">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q73GGZE6P1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q73GGZE6P1');
+</script>
+    <title>Login</title>
+</head>
+<body>
+    <!--Navbar-->
+    <div class="nav">
+      <div class="two">
+        <a href="/"><img src="../static/images/edzetta original logo.png" alt="" /> 
+        </a> 
+      </div>
+  
+      <div id="overlay">
+        <div class="navcard"></div>
+      </div>
+  
+      <div class="hb">
+        <a id="btnhb" href="#" class="hamburger hide-for-dekstop">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </div>
+  
+      <div class="one">
+        <a href="/" style="text-decoration: none">
+          <p>Home</p>
+        </a>
+        <a href="courses" style="text-decoration: none">
+          <p>Courses</p>
+        </a>
+        <a href="blogs" style="text-decoration: none">
+          <p>Blog</p>
+        </a>
+     
+      </div>
+  
+    </div>
+  
+    <div id="hm" class="header__menu hide-for-dekstop hide-for-mobile">
+      <a href="/" style="text-decoration: none">
+        <p>Home</p>
+      </a>
+      <a href="courses" style="text-decoration: none">
+        <p>Courses</p>
+      </a>
+      <a href="blogs" style="text-decoration: none">
+        <p>Blog</p>
+      </a>
+      <a href="./about.html" style="text-decoration: none">
+       
+      </a>
+      <a href="./about.html" style="text-decoration: none"></a>
+
+  
+    </div>
+  
+    <!--End of Navbar-->
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img style="width: 50px; height: 50px; margin: 12px;" src="../static/images/login_header.jpg" id="icon" alt="User Icon" />
+          </div>
+      
+          <!-- Login Form -->
+          <form method="POST" >
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" required>
+            <input type="submit" class="fadeIn fourth" value="Log In">
+          </form>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
+          </div>
+      
+        </div>
+      </div>
+</body>
+</html>

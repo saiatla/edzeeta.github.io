@@ -1,0 +1,30 @@
+
+id="callback_form"
+
+<div style="display: none" id="loader" class="loader_parent">
+    <div class="loader"></div>
+  </div>
+
+
+  e.preventDefault();
+  
+var myForm_two = document.getElementById("callback_form");
+
+myForm_two.addEventListener("submit", (e) => {
+    //add animation stuff here
+
+    var nav = document.getElementsByClassName("nav")
+    var grid = document.getElementsByClassName("grid-container")
+    var hm = document.getElementById("hm")
+    hm.classList.add("blur");
+    nav[0].classList.add("blur");
+    grid[0].classList.add("blur");
+    myForm_two.classList.add("blur");
+
+    $('#myModal1').modal('hide')
+
+    var animation = document.getElementById("loader")
+    animation.style.display="block"
+
+
+  });
